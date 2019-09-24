@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Boostrap All CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <title>JS Array To HTML Table</title> 
+</head>
+
+<body>
+    <script>
+        var test = new Array();
+        for (var i = 0; i < 10; i++) {
+            test[i] = Math.random();
+        }
+    </script>
+    <h3 align="center">JS Array To HTML Table</h3>
+
+    <button onclick="myFunction()">Click Here</button>
+
+    <!-- Table Print Here -->
+    <div id="data">
+
+    </div>
+
+   
+
+    <script>
+        function myFunction() {
+            var html = "<table border='1|1' class ='table table-striped'>";
+            html += "<thead>";
+            html += "<tr>";
+            html += "<th>" + "Random Number 1" + "</th>";      //Table Head    
+            html += "<th>" + "Random Number 2" + "</th>";
+            html += "<th>" + "Random Number 3" + "</th>";       
+            html += "</tr>";
+            html += "</thead>";
+            for (var i = 0; i < test.length; i++) {
+                html += "<tr>";
+                html += "<td>" + test[i] + "</td>";            //Table Data
+                html += "<td>" + test[i] + "</td>";
+                html += "<td>" + test[i] + "</td>";
+                html += "</tr>";
+            }
+            html += "</table>";
+            document.getElementById("data").innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>
