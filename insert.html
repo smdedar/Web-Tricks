@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Insert Data in Realtime Database</title>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-firestore.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="config.js"></script>
+</head>
+
+<body>
+    
+    <input type="number" id="idno" placeholder="idno" required>
+    <input type="text" id="name" placeholder="name">
+    <input type="text" id="email" placeholder="email">
+    <button onclick="save()">Save</button>
+    <button onclick="read()">Read</button>
+   
+</body>
+
+</html>
+
+
+<script>
+    var database = firebase.database();
+
+//Write Data Function
+    function save() {
+        var idno = document.getElementById('idno').value;
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+
+        console.log(idno);
+        if (idno != "") {
+            writeUserData(idno, name, email);
+        }
+    }
+
+
+    function writeUserData(idno, name, email) {
+        firebase.database().ref('ID/' + idno).set({
+            name: name,
+            email: email
+        });
+        alert("Data Saved");
+    }
+
+//Read Data Function
+    function read() {
+        var starCountRef = firebase.database().ref('ID/');
+        starCountRef.on('value', function (data) {
+            // console.log(data.val());
+            data.forEach(function (item) {
+                var itemVal = item.val();
+
+                console.log(itemVal.name);
+                console.log(itemVal.email);
+            });
+
+        });
+    }
+
+//Another Function for Read Data
+    function read2() {
+        var ref = firebase.database().ref('ID');
+
+        ref.on("value", function (snapshot) {
+            //console.log(snapshot.val());
+            snapshot.forEach(function (item) {
+                var itemVal = item.val();
+                console.log(itemVal.name);
+            });
+
+        }, function (error) {
+            console.log("Error: " + error.code);
+        });
+    }
+</script>
