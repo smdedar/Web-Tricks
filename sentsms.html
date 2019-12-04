@@ -1,0 +1,13 @@
+<script>
+    function sentsms() {
+        var sms = encodeURI("Test Message ... Yo!. Sent By - Dedar Alam");  //SMS Body
+        var to = " "; //Receiver Number
+        var token = "";    //SMS Provider Token Here
+        var url = "http://api.greenweb.com.bd/api.php?token=" + token + "&to=" + to + "&message=" + sms;
+
+        let response = fetch(url);
+    }
+
+    //SMS Provider bdbulksms.net
+</script>
+
